@@ -46,6 +46,7 @@
         <file alias="console_error">res/icons/console_error.png</file>
         <file alias="info">res/icons/info.png</file>
         <file alias="back">res/icons/back.png</file>
+        <file alias="masternode">res/icons/masternode.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="about">res/images/about.png</file>

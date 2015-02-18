@@ -214,7 +214,7 @@ void BitcoinGUI::createActions()
     miningAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
     tabGroup->addAction(miningAction);
 
-    masternodeAction = new QAction(QIcon(":/icons/tx_mined"), tr("Master&nodes"), this);
+    masternodeAction = new QAction(QIcon(":/icons/masternode"), tr("Master&nodes"), this);
     masternodeAction->setStatusTip(tr("Manage masternodes"));
     masternodeAction->setToolTip(masternodeAction->statusTip());
     masternodeAction->setCheckable(true);
