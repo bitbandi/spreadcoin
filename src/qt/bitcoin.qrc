@@ -41,6 +41,9 @@
         <file alias="qrcode">res/icons/qrcode.png</file>
         <file alias="explorer">res/icons/explorer.png</file>
         <file alias="console">res/icons/console.png</file>
+        <file alias="console_in">res/icons/console_in.png</file>
+        <file alias="console_out">res/icons/console_out.png</file>
+        <file alias="console_error">res/icons/console_error.png</file>
         <file alias="info">res/icons/info.png</file>
         <file alias="back">res/icons/back.png</file>
     </qresource>
