@@ -173,6 +173,8 @@ public slots:
     void incomingTransaction(const QString& date, int unit, qint64 amount, const QString& type, const QString& address);
 
 private slots:
+    /** Set the theme. */
+    void setTheme(QString theme);
     /** Switch to overview (home) page */
     void gotoOverviewPage();
     /** Switch to history (transactions) page */

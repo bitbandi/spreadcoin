@@ -48,6 +48,7 @@ void OptionsModel::Init()
     fMinimizeOnClose = settings.value("fMinimizeOnClose", false).toBool();
     nTransactionFee = settings.value("nTransactionFee").toLongLong();
     language = settings.value("language", "").toString();
+    theme = settings.value("theme", "").toString();
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
 
     // These are shared with core Bitcoin; we want
@@ -195,6 +196,8 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return QVariant(nDisplayUnit);
         case DisplayAddresses:
             return QVariant(bDisplayAddresses);
+        case Theme:
+            return settings.value("theme", "");
         case Language:
             return settings.value("language", "");
         case CoinControlFeatures:
@@ -277,6 +280,11 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
         case DisplayAddresses:
             bDisplayAddresses = value.toBool();
             settings.setValue("bDisplayAddresses", bDisplayAddresses);
+            break;
+        case Theme:
+            theme = value.toString();
+            settings.setValue("theme", theme);
+            emit themeChanged(theme);
             break;
         case Language:
             settings.setValue("language", value);

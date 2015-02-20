@@ -28,6 +28,7 @@ public:
         Fee,               // qint64
         DisplayUnit,       // BitcoinUnits::Unit
         DisplayAddresses,  // bool
+        Theme,             // QString
         Language,          // QString
         CoinControlFeatures, // bool
         OptionIDRowCount,
@@ -50,6 +51,7 @@ public:
     int getDisplayUnit() { return nDisplayUnit; }
     bool getDisplayAddresses() { return bDisplayAddresses; }
     QString getLanguage() { return language; }
+    QString getTheme() { return theme; }
     bool getCoinControlFeatures();
 
 private:
@@ -58,9 +60,11 @@ private:
     bool fMinimizeToTray;
     bool fMinimizeOnClose;
     QString language;
+    QString theme;
     bool fCoinControlFeatures;
 
 signals:
+    void themeChanged(QString);
     void displayUnitChanged(int unit);
     void transactionFeeChanged(qint64);
     void coinControlFeaturesChanged(bool);

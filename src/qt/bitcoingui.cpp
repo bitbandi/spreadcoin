@@ -50,6 +50,8 @@
 #endif
 #include <QMimeData>
 #include <QStyle>
+#include <QStyleFactory>
+#include <QTextStream>
 #include <QSettings>
 #include <QDesktopWidget>
 #include <QListWidget>
@@ -82,6 +84,9 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) :
     // Create wallet frame and make it the central widget
     walletFrame = new WalletFrame(this);
     setCentralWidget(walletFrame);
+
+    QSettings settings;
+    setTheme(settings.value("theme").toString());
 
     // Accept D&D of URIs
     setAcceptDrops(true);
@@ -370,6 +375,8 @@ void BitcoinGUI::setClientModel(ClientModel *clientModel)
         // Receive and report messages from network/worker thread
         connect(clientModel, SIGNAL(message(QString,QString,unsigned int)), this, SLOT(message(QString,QString,unsigned int)));
 
+        connect(clientModel->getOptionsModel(), SIGNAL(themeChanged(QString)), this, SLOT(setTheme(QString)));
+
         rpcConsole->setClientModel(clientModel);
         walletFrame->setClientModel(clientModel);
     }
@@ -498,6 +505,23 @@ void BitcoinGUI::optionsClicked()
     OptionsDialog dlg;
     dlg.setModel(clientModel->getOptionsModel());
     dlg.exec();
+}
+
+void BitcoinGUI::setTheme(QString theme)
+{
+    qApp->setStyleSheet("");
+    if (QStyleFactory::keys().contains(theme)) {
+        QApplication::setStyle(QStyleFactory::create(theme));
+    } else {
+        QFile f(QString(":%1/style.qss").arg(theme));
+        QApplication::setStyle("");
+        if (f.exists())
+        {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll());
+        }
+    }
 }
 
 void BitcoinGUI::aboutClicked()
