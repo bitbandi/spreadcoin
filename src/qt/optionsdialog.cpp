@@ -81,6 +81,7 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     }
 
     ui->theme->addItem(QString("(") + tr("default") + QString(")"), QVariant(""));
+    ui->theme->addItem(QString("QDarkStyle"), QVariant("qdarkstyle"));
     QStringList list = QStyleFactory::keys();
     list.sort();
     foreach(const QString &themeStr, list)

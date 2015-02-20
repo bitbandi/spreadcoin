@@ -341,7 +341,8 @@ SOURCES += src/qt/bitcoin.cpp \
     src/masternodes_elected.cpp \
     src/masternode_my.cpp
 
-RESOURCES += src/qt/bitcoin.qrc
+RESOURCES += src/qt/bitcoin.qrc \
+    src/qt/res/themes/qdarkstyle/style.qrc
 
 FORMS += src/qt/forms/sendcoinsdialog.ui \
     src/qt/forms/coincontroldialog.ui \
