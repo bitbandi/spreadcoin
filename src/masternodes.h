@@ -23,6 +23,8 @@ static const int g_InstantTxInterval = g_InstantTxPeriod*g_InstantTxMaxConfirmat
 
 #define IN 0
 #define OUT 1
+#define FOREACH_INOUT(x) \
+    for (int x = IN; x <= OUT; x++)
 
 class CMasterNode
 {

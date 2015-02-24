@@ -522,7 +522,7 @@ void MN_CastVotes(std::vector<COutPoint> vvotes[], CCoinsViewCache &coins)
         vpvotes[OUT].resize(g_MaxMasternodeVotes - numVotes0);
     }
 
-    for (int i = 0; i < 2; i++)
+    FOREACH_INOUT(i)
     {
         for (const CMasterNode* pmn : vpvotes[i])
         {
@@ -536,7 +536,7 @@ void MN_GetVotes(CBlockIndex* pindex, boost::unordered_map<COutPoint, int> vvote
     CBlockIndex* pCurBlock = pindex->pprev;
     for (int i = 0; i < g_MasternodesElectionPeriod && pCurBlock; i++)
     {
-        for (int j = 0; j < 2; j++)
+        FOREACH_INOUT(j)
         {
             for (COutPoint vote : pCurBlock->vvotes[j])
             {
@@ -550,7 +550,7 @@ void MN_GetVotes(CBlockIndex* pindex, boost::unordered_map<COutPoint, int> vvote
         pCurBlock = pCurBlock->pprev;
     }
 
-    for (int i = 0; i < 2; i++)
+    FOREACH_INOUT(i)
     {
         for (const auto& pair : vvotes[i])
         {
@@ -608,7 +608,7 @@ void MN_GetAll(std::vector<const CMasterNode*>& masternodes)
         CMasterNode* pmn = &pair.second;
         masternodes.push_back(pmn);
 
-        for (int i = 0; i < 2; i++)
+        FOREACH_INOUT(i)
         {
             pmn->votes[i] = 0;
             auto iter = vvotes[i].find(pmn->outpoint);

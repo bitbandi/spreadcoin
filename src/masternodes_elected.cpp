@@ -59,7 +59,7 @@ CKeyID CElectedMasternodes::FillBlock(CBlockIndex* pindex, CCoinsViewCache &Coin
     boost::unordered_map<COutPoint, int> vvotes[2];
     MN_GetVotes(pindex, vvotes);
 
-    for (int j = 0; j < 2; j++)
+    FOREACH_INOUT(j)
     {
         for (const std::pair<COutPoint, int>& pair : vvotes[j])
         {
