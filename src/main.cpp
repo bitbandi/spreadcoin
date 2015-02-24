@@ -1380,7 +1380,7 @@ int64 GetBlockValue(int nHeight, int64 nFees)
     {
         nSubsidy *= 10;
         if (nHeight < 100)
-            nSubsidy *= 10;
+            nSubsidy *= 10000;
     }
 
     // Subsidy is cut in half every g_RewardHalvingPeriod blocks which will occur approximately every 4 years.
@@ -3269,7 +3269,7 @@ static CBlock getGenesisBlock()
     block.hashPrevBlock = 0;
     block.hashMerkleRoot = block.BuildMerkleTree();
     block.nVersion = 1;
-    block.nTime    = fTestNet? 1423400000 : 1406620000;
+    block.nTime    = fTestNet? 1423400001 : 1406620000;
     block.nBits    = bnProofOfWorkLimit.GetCompact();
     block.nHeight  = 0;
 
