@@ -462,8 +462,8 @@ static bool compareMasternodesByScore(const CMasterNode* pLeft, const CMasterNod
 
 void MN_CastVotes(std::vector<COutPoint> vvotes[], CCoinsViewCache &coins)
 {
-    vvotes[0].clear();
-    vvotes[1].clear();
+    vvotes[IN].clear();
+    vvotes[OUT].clear();
 
     // Check if we are monitoring network long enough to start voting
     if (nBestHeight < g_InitialBlock + g_MonitoringPeriodMin || nBestHeight < 5*g_AnnounceExistenceRestartPeriod)
@@ -498,28 +498,28 @@ void MN_CastVotes(std::vector<COutPoint> vvotes[], CCoinsViewCache &coins)
 
     // Find differences between elected masternodes and our opinion on what masternodes should be elected.
     // These differences are our votes.
-    set_differences(velected, vknown, vpvotes[0], vpvotes[1], compareMasternodesByScore);
+    set_differences(velected, vknown, vpvotes[IN], vpvotes[OUT], compareMasternodesByScore);
 
-    std::reverse(vpvotes[0].begin(), vpvotes[0].end());
+    std::reverse(vpvotes[IN].begin(), vpvotes[IN].end());
 
     // Check if there too many votes
-    int totalVotes = vpvotes[0].size() + vpvotes[1].size();
+    int totalVotes = vpvotes[IN].size() + vpvotes[OUT].size();
     if (totalVotes > g_MaxMasternodeVotes)
     {
         int numVotes0;
 
-        if (vpvotes[0].empty())
+        if (vpvotes[IN].empty())
             numVotes0 = 0;
-        else if (vpvotes[1].empty())
+        else if (vpvotes[OUT].empty())
             numVotes0 = g_MaxMasternodeVotes;
         else
         {
-            numVotes0 = (int)round(double(vpvotes[0].size())*g_MaxMasternodeVotes/totalVotes);
+            numVotes0 = (int)round(double(vpvotes[IN].size())*g_MaxMasternodeVotes/totalVotes);
             numVotes0 = boost::algorithm::clamp(numVotes0, 1, g_MaxMasternodeVotes - 1);
         }
 
-        vpvotes[0].resize(numVotes0);
-        vpvotes[1].resize(g_MaxMasternodeVotes - numVotes0);
+        vpvotes[IN].resize(numVotes0);
+        vpvotes[OUT].resize(g_MaxMasternodeVotes - numVotes0);
     }
 
     for (int i = 0; i < 2; i++)

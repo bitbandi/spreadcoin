@@ -41,8 +41,8 @@ CKeyID CElectedMasternodes::FillBlock(CBlockIndex* pindex, CCoinsViewCache &Coin
     if (pindex->nHeight <= (int)getThirdHardforkBlock())
         return CKeyID(0);
 
-    pindex->velected[0].clear();
-    pindex->velected[1].clear();
+    pindex->velected[IN].clear();
+    pindex->velected[OUT].clear();
 
     COutPoint payeeOutpoint;
     CKeyID payee(0);
@@ -52,7 +52,7 @@ CKeyID CElectedMasternodes::FillBlock(CBlockIndex* pindex, CCoinsViewCache &Coin
     {
         if (!MN_IsAcceptableMasternodeInput(outpoint, &Coins))
         {
-            pindex->velected[0].push_back(outpoint);
+            pindex->velected[IN].push_back(outpoint);
         }
     }
 

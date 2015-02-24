@@ -21,6 +21,9 @@ static const int g_InstantTxMaxConfirmations = 10;
 static const int g_InstantTxMinConfirmations = 7;
 static const int g_InstantTxInterval = g_InstantTxPeriod*g_InstantTxMaxConfirmations;
 
+#define IN 0
+#define OUT 1
+
 class CMasterNode
 {
     struct CReceivedExistenceMsg
