@@ -8,7 +8,7 @@
 #include "masternode_my.h"
 
 static const int64_t g_MinMasternodeAmount = 100*COIN;
-static const int g_MaxMasternodeVotes = 10;
+static const int g_MaxMasternodeVotes = 100;
 static const int g_MasternodesElectionPeriod = 60;
 static const int g_MasternodeRewardPercentage = 30;
 static const int g_MaxMasternodes = 1440;
